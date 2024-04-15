@@ -14,7 +14,7 @@ When you download the Plugin as ZIP file from GitHub, please rename the extracte
 1. Copy the assAccountingQuestion directory to your ILIAS installation at the following path 
 (create subdirectories, if neccessary):
 Customizing/global/plugins/Modules/TestQuestionPool/Questions/
-2. Run `composer install --no-dev` in the main directory of your ILIAS installation
+2. Run `composer du` in the main directory of your ILIAS installation
 3. Run the ILIAS setup in the main directory of your ILIAS installation
 4. Go to Administration > Plugins
 5. Choose "Install" for the assAccountingQuestion plugin
