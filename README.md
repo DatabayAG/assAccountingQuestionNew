@@ -31,7 +31,6 @@ See [Anleitung](docs/Anleitung-Deutsch.pdf) or [Manual](docs/Manual-English.pdf)
 
 Version History
 ===============
-* Version 1.20 for ILIAS 7.11+ is maintained in https://github.com/ilifau/assAccountingQuestion/tree/main-ilias7
 
 Version 1.20.0 (2022-09-20)
 --------------------------
