@@ -5,7 +5,6 @@ Copyright (c) 2023 Institut fuer Lern-Innovation, Friedrich-Alexander-Universita
 
 **Further maintenance is provided by Databay AG (https://www.databay.de).**
 
-- Author: Fred Neumann <fred.neumann@ili.fau.de>, Jesus Copado <jesus.copado@ili.fau.de>
 - Forum: http://www.ilias.de/docu/goto_docu_frm_3474_1944.html
 - Bug Reports: http://www.ilias.de/mantis (Choose project "ILIAS plugins" and filter by category "Accounting Question")
 
@@ -31,13 +30,9 @@ See [Anleitung](docs/Anleitung-Deutsch.pdf) or [Manual](docs/Manual-English.pdf)
 
 Version History
 ===============
-* Version 1.21 for ILIAS 8.6+ is maintained in https://github.com/DatabayAG/assAccountingQuestion/tree/main-ilias8
-* Version 1.20 for ILIAS 7.11+ is maintained in https://github.com/DatabayAG/assAccountingQuestion/tree/main-ilias7
+
+Plugin versions for different ILIAS releases are provided in separate branches of this repository.
 
 Version 1.21.0 (2023-11.21)
 ---------------------------
 * Update for ILIAS 8.6
-
-Version 1.20.0 (2022-09-20)
---------------------------
-* Updated for ILIAS 7.13 new fromXML definition
