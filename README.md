@@ -5,7 +5,6 @@ Copyright (c) 2018 Institut fuer Lern-Innovation, Friedrich-Alexander-Universita
 
 **Further maintenance is provided by [Databay AG](https://www.databay.de).**
 
-- Author: Fred Neumann <fred.neumann@ili.fau.de>, Jesus Copado <jesus.copado@ili.fau.de>
 - Forum: http://www.ilias.de/docu/goto_docu_frm_3474_1944.html
 - Bug Reports: http://www.ilias.de/mantis (Choose project "ILIAS plugins" and filter by category "Accounting Question")
 
@@ -31,6 +30,8 @@ See [Anleitung](docs/Anleitung-Deutsch.pdf) or [Manual](docs/Manual-English.pdf)
 
 Version History
 ===============
+
+Plugin versions for different ILIAS releases are provided in separate branches of this repository.
 
 Version 1.20.0 (2022-09-20)
 --------------------------
