@@ -84,7 +84,7 @@ class assAccountingQuestionImport extends assQuestionImport
         $this->object->setComment($item->getComment());
         $this->object->setAuthor($item->getAuthor());
         $this->object->setOwner($ilUser->getId());
-        $this->object->setQuestion($this->object->QTIMaterialToString($item->getQuestiontext()));
+        $this->object->setQuestion($this->QTIMaterialToString($item->getQuestiontext()));
         $this->object->setObjId($questionpool_id);
         $this->object->setAccountsXML(base64_decode($item->getMetadataEntry('accounts_content')));
         $this->object->setVariablesXML(base64_decode($item->getMetadataEntry('variables_content')));
@@ -110,7 +110,7 @@ class assAccountingQuestionImport extends assQuestionImport
                 // this enables images in the parts text
                 // the material index 0 is used for the question text
                 if (isset($item->presentation->material[$i + 1])) {
-                    $part['text'] = $this->object->QTIMaterialToString($item->presentation->material[$i + 1]);
+                    $part['text'] = $this->QTIMaterialToString($item->presentation->material[$i + 1]);
                 }
 
                 // create and add a new part
@@ -127,7 +127,7 @@ class assAccountingQuestionImport extends assQuestionImport
 
         // convert the generic feedback
         foreach ($feedbacksgeneric as $correctness => $material) {
-            $m = $this->object->QTIMaterialToString($material);
+            $m = $this->QTIMaterialToString($material);
             $feedbacksgeneric[$correctness] = $m;
         }
 

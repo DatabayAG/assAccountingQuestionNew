@@ -233,7 +233,6 @@ class assAccountingQuestion extends assQuestion
 		$this->setId($question_id);
 		$this->setTitle($data["title"] ?? '');
 		$this->setComment($data["description"] ?? '');
-		$this->setSuggestedSolution($data["solution_hint"] ?? '');
 		$this->setOriginalId($data["original_id"]);
 		$this->setObjId($data["obj_fi"] ?? 0);
 		$this->setAuthor($data["author"] ?? '');
@@ -311,7 +310,7 @@ class assAccountingQuestion extends assQuestion
 		// the parts, however, still point to the original ones
 		$clone = clone $this;
 
-		$original_id = assQuestion::_getOriginalId($this->getId());
+		$original_id = $this->questioninfo->getOriginalId($this->id);
 		$clone->setId(-1);
 
 		if ((int)$testObjId > 0) {
@@ -1065,7 +1064,7 @@ class assAccountingQuestion extends assQuestion
      * @return integer/array $points/$details (array $details is deprecated !!)
      * @throws ilTestException
      */
-	public function calculateReachedPoints($active_id, $pass = NULL,  $authorizedSolution = true, $returndetails = FALSE)
+	public function calculateReachedPoints($active_id, $pass = NULL,  $authorizedSolution = true, $returndetails = FALSE): float|array
 	{
 		if ($returndetails)
 		{
@@ -1337,8 +1336,16 @@ class assAccountingQuestion extends assQuestion
 			'il_qpl_qst_accqst_part');
 	}
 
+    /**
+     * Returns the name of the answer table in the database
+     * @return string The answer table name
+     */
+    public function getAnswerTableName(): string
+    {
+        return "";
+    }
 
-	/**
+    /**
 	 * Collects all text in the question which could contain media objects
 	 * which were created with the Rich Text Editor
 	 */

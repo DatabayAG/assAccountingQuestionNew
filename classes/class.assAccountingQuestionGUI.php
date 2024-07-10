@@ -321,7 +321,7 @@ class assAccountingQuestionGUI extends assQuestionGUI
 
         // Text
 		$item = new ilTextAreaInputGUI($this->plugin->txt("question_part"), 'text_' . $part_obj->getPartId());
-		$item->setValue($this->object->prepareTextareaOutput($part_obj->getText()));
+		$item->setValue(self::prepareTextareaOutput($part_obj->getText()));
 		$item->setRows(10);
 		$item->setCols(80);
 		if (!$this->object->getSelfAssessmentEditingMode()) {
@@ -596,7 +596,7 @@ class assAccountingQuestionGUI extends assQuestionGUI
 		// general question text
 		$questiontext = $this->object->getQuestion();
 
-		$tpl->setVariable("QUESTION_TEXT", $this->object->prepareTextareaOutput($questiontext, TRUE));
+		$tpl->setVariable("QUESTION_TEXT", self::prepareTextareaOutput($questiontext, TRUE));
 
 		$parts = $this->object->getParts();
 		$accounts = $this->object->getAccountsData();
@@ -725,7 +725,7 @@ class assAccountingQuestionGUI extends assQuestionGUI
 
 		// general question text
 		$questiontext = $this->object->getQuestion();
-		$tpl->setVariable("QUESTIONTEXT", $this->object->prepareTextareaOutput($questiontext, TRUE));
+		$tpl->setVariable("QUESTIONTEXT", self::prepareTextareaOutput($questiontext, TRUE));
 
 		// add all answering parts
 		$parts = $this->object->getParts();
@@ -897,7 +897,7 @@ class assAccountingQuestionGUI extends assQuestionGUI
 			// show the part's intro text
 			if ($part_obj->getText())
 			{
-				$template->setVariable('TEXT', $this->object->prepareTextareaOutput($part_obj->getText(), TRUE));
+				$template->setVariable('TEXT', self::prepareTextareaOutput($part_obj->getText(), TRUE));
 			}
 
 			// show the user solution or the correct solution
@@ -935,10 +935,10 @@ class assAccountingQuestionGUI extends assQuestionGUI
 		$questiontext = $this->object->getQuestion();
 		if ($show_question_text)
 		{
-			$template->setVariable("QUESTIONTEXT", $this->object->prepareTextareaOutput($questiontext, TRUE));
+			$template->setVariable("QUESTIONTEXT", self::prepareTextareaOutput($questiontext, TRUE));
 		}
 
-		if (DEBUG)
+		if ($this->plugin->isDebug())
 		{
 			$template->setVariable("DEBUG_GRAPHICAL_OUTPUT", $graphicalOutput);
 			$template->setVariable("DEBUG_RESULT_OUTPUT", $result_output);
@@ -961,7 +961,7 @@ class assAccountingQuestionGUI extends assQuestionGUI
 		$feedback = ($show_feedback) ? $this->getGenericFeedbackOutput($active_id, $pass) : "";
 		if (strlen($feedback))
 		{
-			$solutiontemplate->setVariable("FEEDBACK", $this->object->prepareTextareaOutput($feedback, true));
+			$solutiontemplate->setVariable("FEEDBACK", self::prepareTextareaOutput($feedback, true));
 		}
 
 		$solutionoutput = $solutiontemplate->get();
