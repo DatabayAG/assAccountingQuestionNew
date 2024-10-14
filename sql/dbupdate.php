@@ -158,4 +158,13 @@ if(!$ilDB->tableColumnExists('il_qpl_qst_accqst_data', 'thousands_delim_type'))
     );
 }
 ?>
-
+<#8>
+<?php
+/*
+ * Add missing plugin name (required for question list in question pool since ILIAS 9)
+ */
+if($ilDB->tableColumnExists('qpl_qst_type', 'plugin_name'))
+{
+    $ilDB->manipulate("UPDATE qpl_qst_type set plugin_name = type_tag WHERE type_tag ='assAccountingQuestion'");
+}
+?>

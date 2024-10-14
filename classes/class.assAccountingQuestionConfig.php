@@ -9,9 +9,9 @@
  */
 class assAccountingQuestionConfig
 {
-    const DELIM_NONE = 'none';
-    const DELIM_SPACE = 'space';
-    const DELIM_DOT = 'dot';
+    public const DELIM_NONE = 'none';
+    public const DELIM_SPACE = 'space';
+    public const DELIM_DOT = 'dot';
 
     /** @var string type of delimiter used to separate thousands when showing user inputs and calculated numbers */
     public $thousands_delim_type;
@@ -33,7 +33,8 @@ class assAccountingQuestionConfig
      *
      * @param ilassAccountingQuestionPlugin $plugin
      */
-    public function __construct($plugin) {
+    public function __construct($plugin)
+    {
         $this->plugin = $plugin;
 
         $this->settings = new ilSetting('assAccountingQuestion');
@@ -55,7 +56,8 @@ class assAccountingQuestionConfig
     /**
      * Get the effective the thousands delimiter
      */
-    public function getThousandsDelim($type = null) {
+    public function getThousandsDelim($type = null)
+    {
 
         if (empty($type)) {
             $type = $this->thousands_delim_type;
@@ -74,7 +76,8 @@ class assAccountingQuestionConfig
     /**
      * Get the effective the thousands delimiter
      */
-    public function getThousandsDelimText($type = null) {
+    public function getThousandsDelimText($type = null)
+    {
 
         if (empty($type)) {
             $type = $this->thousands_delim_type;

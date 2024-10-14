@@ -1,23 +1,18 @@
 <?php
+
 // Copyright (c) 2019 Institut fuer Lern-Innovation, Friedrich-Alexander-Universitaet Erlangen-Nuernberg, GPLv3, see LICENSE
-
-require_once __DIR__ . '/class.ilAccqstEvalVar.php';
-require_once __DIR__ . '/class.ilAccqstRangeVar.php';
-require_once __DIR__ . '/class.ilAccqstSelectVar.php';
-require_once __DIR__ . '/class.ilAccqstSwitchVar.php';
-
 
 /**
  * Base class for variable definition
  */
 abstract class ilAccqstVariable
 {
-    const MAX_DEPTH = 100;
+    public const MAX_DEPTH = 100;
 
-    const TYPE_RANGE  = 'range';
-    const TYPE_SELECT = 'select';
-    const TYPE_SWITCH = 'switch';
-    const TYPE_EVAL = 'eval';
+    public const TYPE_RANGE = 'range';
+    public const TYPE_SELECT = 'select';
+    public const TYPE_SWITCH = 'switch';
+    public const TYPE_EVAL = 'eval';
 
     /** @var string name of the variable */
     public $name;
@@ -47,20 +42,18 @@ abstract class ilAccqstVariable
 
         $variables = [];
         $plugin = $question->getPlugin();
-        
+
         $root = null;
         try {
             $root = simplexml_load_string($xml);
+        } catch (Exception $e) {
         }
-        catch (Exception $e) {
-        }
-        
+
         if (!($root instanceof SimpleXMLElement && $root->getName() == 'variables')) {
             throw new ilException($plugin->txt('missing_element_variables'));
         }
 
-        foreach ($root->children() as $element)
-        {
+        foreach ($root->children() as $element) {
             if ($element->getName() != 'var' || empty($element['name'])) {
                 throw new ilException($plugin->txt('missing_var_or_name'));
             }
@@ -72,8 +65,7 @@ abstract class ilAccqstVariable
                 throw new ilException(sprintf($plugin->txt('double_variable_definition'), $name));
             }
 
-            switch ($type)
-            {
+            switch ($type) {
                 case self::TYPE_RANGE:
                     $variable = new ilAccqstRangeVar($name, $question);
                     break;

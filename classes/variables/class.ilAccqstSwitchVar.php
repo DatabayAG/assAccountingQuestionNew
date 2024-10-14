@@ -1,4 +1,5 @@
 <?php
+
 // Copyright (c) 2019 Institut fuer Lern-Innovation, Friedrich-Alexander-Universitaet Erlangen-Nuernberg, GPLv3, see LICENSE
 
 
@@ -27,8 +28,7 @@ class ilAccqstSwitchVar extends ilAccqstVariable
         }
         $this->check = (string) $element['check'];
 
-        foreach ($element->children() as $child)
-        {
+        foreach ($element->children() as $child) {
             $case = [];
             switch ($child->getName()) {
                 case 'case':
@@ -36,18 +36,15 @@ class ilAccqstSwitchVar extends ilAccqstVariable
                         $case['type'] = 'text';
                         $case['test'] = (string) $child['text'];
                         $case['return'] = trim((string) $child);
-                    }
-                    elseif (!empty($child['value'])) {
+                    } elseif (!empty($child['value'])) {
                         $case['type'] = 'value';
                         $case['test'] = (string) $child['value'];
                         $case['return'] = trim((string) $child);
-                    }
-                    elseif (!empty($child['max'])) {
+                    } elseif (!empty($child['max'])) {
                         $case['type'] = 'max';
                         $case['test'] = (string) $child['max'];
                         $case['return'] = trim((string) $child);
-                    }
-                    else {
+                    } else {
                         throw new ilException(sprintf($this->plugin->txt('missing_case_value_or_max'), $this->name));
                     }
                     break;
@@ -113,7 +110,7 @@ class ilAccqstSwitchVar extends ilAccqstVariable
             switch ($case['type']) {
 
                 case 'text':
-                    if ($this->plugin->toString($this->check) ==  $this->plugin->toString($case['test'])) {
+                    if ($this->plugin->toString($this->check) == $this->plugin->toString($case['test'])) {
                         $this->value = $case['return'];
                         return true;
                     }
