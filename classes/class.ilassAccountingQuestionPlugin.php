@@ -15,6 +15,7 @@ use ILIAS\TestQuestionPool\InternalRequestService;
 */
 class ilassAccountingQuestionPlugin extends ilQuestionsPlugin
 {
+    protected ?assAccountingQuestionConfig $config;
     protected ?assAccountingQuestionRequest $request;
 
 
