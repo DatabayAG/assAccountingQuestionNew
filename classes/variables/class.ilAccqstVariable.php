@@ -1,12 +1,6 @@
 <?php
 // Copyright (c) 2019 Institut fuer Lern-Innovation, Friedrich-Alexander-Universitaet Erlangen-Nuernberg, GPLv3, see LICENSE
 
-require_once __DIR__ . '/class.ilAccqstEvalVar.php';
-require_once __DIR__ . '/class.ilAccqstRangeVar.php';
-require_once __DIR__ . '/class.ilAccqstSelectVar.php';
-require_once __DIR__ . '/class.ilAccqstSwitchVar.php';
-
-
 /**
  * Base class for variable definition
  */

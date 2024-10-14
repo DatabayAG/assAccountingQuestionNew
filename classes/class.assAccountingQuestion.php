@@ -4,8 +4,6 @@
  * GPLv2, see LICENSE
  */
 
-include_once "./Modules/Test/classes/inc.AssessmentConstants.php";
-
 /**
  * Class for accounting questions
  *
