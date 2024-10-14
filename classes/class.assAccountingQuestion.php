@@ -401,49 +401,16 @@ class assAccountingQuestion extends assQuestion
      */
     public function syncWithOriginal(): void
     {
-        if(!$this->getOriginalId()) {
-            return;
-        }
-
-        // get the original pool
-        $originalObjId = self::lookupParentObjId($this->getOriginalId());
-        if (!$originalObjId) {
-            return;
-        }
-
-        $id = $this->getId();
-        $objId = $this->getObjId();
-        $original = $this->getOriginalId();
-
-        $this->beforeSyncWithOriginal($original, $id, $originalObjId, $objId);
-
-        // get the original question as clone of the current
-        // this keeps all current properties
-        $orig = clone $this;
-
-        // change the ids to their originals
-        $orig->setId($this->getOriginalId());
-        $orig->setOriginalId(null);
-        $orig->setObjId($originalObjId);
-        $orig->saveToDb('', false);
+        parent::syncWithOriginal();
 
         // delete all original parts and set clones of own parts
         // first load parts because they still point to the own parts
+
+        $orig = clone $this;
+        $orig->setId($this->getOriginalId());
         $orig->loadParts();
         $orig->deleteParts();
         $orig->cloneParts($this);
-
-        // copy the question page
-        $orig->deletePageOfQuestion($orig->getId());
-        $orig->createPageObject();
-        $orig->copyPageOfQuestion($this->getId());
-
-        // now we are back at the current question
-        $this->updateSuggestedSolutions($orig->getId());
-        $this->syncXHTMLMediaObjectsOfQuestion();
-
-        $this->afterSyncWithOriginal($original, $id, $originalObjId, $objId);
-        $this->syncHints();
     }
 
     /**
