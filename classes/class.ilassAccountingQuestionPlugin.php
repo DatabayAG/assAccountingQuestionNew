@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright (c) 2013 Institut fuer Lern-Innovation, Friedrich-Alexander-Universitaet Erlangen-Nuernberg 
- * GPLv2, see LICENSE 
+ * Copyright (c) 2013 Institut fuer Lern-Innovation, Friedrich-Alexander-Universitaet Erlangen-Nuernberg
+ * GPLv2, see LICENSE
  */
 
 use ILIAS\TestQuestionPool\InternalRequestService;
@@ -16,24 +16,24 @@ use ILIAS\TestQuestionPool\InternalRequestService;
 class ilassAccountingQuestionPlugin extends ilQuestionsPlugin
 {
     protected ?assAccountingQuestionRequest $request;
-    
-    
-    final function getPluginName() : string
+
+
+    final public function getPluginName(): string
     {
         return "assAccountingQuestion";
     }
 
-    final function getQuestionType()
+    final public function getQuestionType()
     {
         return "assAccountingQuestion";
     }
 
-    final function getQuestionTypeTranslation() : string
+    final public function getQuestionTypeTranslation(): string
     {
         return $this->txt($this->getQuestionType());
     }
-    
-    public function uninstall() : bool
+
+    public function uninstall(): bool
     {
         if (parent::uninstall()) {
             $this->db->dropSequence('il_qpl_qst_accqst_part');
@@ -48,7 +48,7 @@ class ilassAccountingQuestionPlugin extends ilQuestionsPlugin
      * Get the request handler
      * (may move to a local dic in the future)
      */
-    public function request() : assAccountingQuestionRequest
+    public function request(): assAccountingQuestionRequest
     {
         global $DIC;
         if (!isset($this->request)) {
@@ -94,8 +94,7 @@ class ilassAccountingQuestionPlugin extends ilQuestionsPlugin
         try {
             if (is_float($value) || is_int($value)) {
                 return (float) $value;
-            }
-            else {
+            } else {
                 $nosep = ($separator == ',' ? '.' : ',');
 
                 $string = strval($value);
@@ -104,8 +103,7 @@ class ilassAccountingQuestionPlugin extends ilQuestionsPlugin
                 $string = str_replace($separator, '.', $string);
                 return floatval($string);
             }
-        }
-        catch (Exception $e) {
+        } catch (Exception $e) {
             return '';
         }
     }
@@ -118,17 +116,15 @@ class ilassAccountingQuestionPlugin extends ilQuestionsPlugin
      * @param string  $thousands_delim  for showing numbers
      * @return string
      */
-    public function toString($value = null,  $precision = null, $thousands_delim = '')
+    public function toString($value = null, $precision = null, $thousands_delim = '')
     {
         try {
             if (is_string($value)) {
                 return $value;
-            }
-            else {
+            } else {
                 if ((is_int($value) || is_float($value)) && is_int($precision)) {
                     $string = number_format($value, $precision, ',', $thousands_delim);
-                }
-                else {
+                } else {
                     $string = strval($value);
                     $string = str_replace('.', ',', $string);
                     $string = str_replace(' ', '', $string);
@@ -136,8 +132,7 @@ class ilassAccountingQuestionPlugin extends ilQuestionsPlugin
 
                 return $string;
             }
-        }
-        catch (Exception $e) {
+        } catch (Exception $e) {
             return '';
         }
     }

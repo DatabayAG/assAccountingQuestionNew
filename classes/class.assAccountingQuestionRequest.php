@@ -25,7 +25,7 @@ class assAccountingQuestionRequest
     /**
      * Get a string value from the request (HTML is stripped)
      */
-    public function getInt(string $key) : int
+    public function getInt(string $key): int
     {
         return $this->int($key);
     }
@@ -34,16 +34,16 @@ class assAccountingQuestionRequest
      * Get an array of integers from the request
      * @return int[]
      */
-    public function getIntArray(string $key) : array
+    public function getIntArray(string $key): array
     {
         return $this->intArray($key);
     }
-    
-    
+
+
     /**
      * Get a string value from the request (HTML is stripped)
      */
-    public function getString(string $key) : string
+    public function getString(string $key): string
     {
         return $this->str($key);
     }
@@ -51,7 +51,7 @@ class assAccountingQuestionRequest
     /**
      * Get an xml string from the request (HTML is NOT stripped)
      */
-    public function getXml(string $key) : string 
+    public function getXml(string $key): string
     {
         if ($this->isArray($key)) {
             return "";
@@ -59,8 +59,8 @@ class assAccountingQuestionRequest
         $t = $this->refinery->kindlyTo()->string();
         return \ilUtil::stripOnlySlashes((string) ($this->get($key, $t) ?? ""));
     }
-    
-    
+
+
 
     /**
      * Check if a file is uploaded with a key
@@ -68,11 +68,11 @@ class assAccountingQuestionRequest
      * @param string $key      key of the $_FILES array, should not be nested
      * @return string
      */
-    public function hasFile(string $key) : string 
+    public function hasFile(string $key): string
     {
         $uploaded_files = $this->http->request()->getUploadedFiles();
-        
-        return isset($uploaded_files[$key]) 
+
+        return isset($uploaded_files[$key])
             && $uploaded_files[$key] instanceof UploadedFileInterface
             && $uploaded_files[$key]->getError() == UPLOAD_ERR_OK;
     }
@@ -83,17 +83,16 @@ class assAccountingQuestionRequest
      * @param string $key      key of the $_FILES array, should not be nested
      * @return string
      */
-    public function getFileContent(string $key) : string
+    public function getFileContent(string $key): string
     {
         $uploaded_files = $this->http->request()->getUploadedFiles();
 
         if (isset($uploaded_files[$key])
             && $uploaded_files[$key] instanceof UploadedFileInterface
             && $uploaded_files[$key]->getError() == UPLOAD_ERR_OK) {
-            
+
             return (string) $uploaded_files[$key]->getStream();
         }
         return '';
     }
 }
-

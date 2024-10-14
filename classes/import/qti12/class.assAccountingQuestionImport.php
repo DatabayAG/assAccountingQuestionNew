@@ -20,20 +20,27 @@ class assAccountingQuestionImport extends assQuestionImport
      *
      * @ineritdoc
      */
-    function fromXML(&$item, $questionpool_id, &$tst_id, &$tst_object, &$question_counter, $import_mapping) : array
+    public function fromXML(&$item, $questionpool_id, &$tst_id, &$tst_object, &$question_counter, $import_mapping): array
     {
         global $DIC;
 
         $ilUser = $DIC->user();
         $ilLog = $DIC->logger()->root();
-        
+
         // empty session variable for imported xhtml mobs
         ilSession::clear('import_mob_xhtml');
-        
+
         $presentation = $item->getPresentation();
         $now = getdate();
-        $created = sprintf("%04d%02d%02d%02d%02d%02d", $now['year'], $now['mon'], $now['mday'], $now['hours'],
-            $now['minutes'], $now['seconds']);
+        $created = sprintf(
+            "%04d%02d%02d%02d%02d%02d",
+            $now['year'],
+            $now['mon'],
+            $now['mday'],
+            $now['hours'],
+            $now['minutes'],
+            $now['seconds']
+        );
 
         // get the generic feedbach
         $feedbacksgeneric = array();
@@ -146,19 +153,28 @@ class assAccountingQuestionImport extends assQuestionImport
                 ilObjMediaObject::_saveUsage($media_object->getId(), "qpl:html", $this->object->getId());
 
                 // images in question text
-                $questiontext = str_replace("src=\"" . $mob["mob"] . "\"",
-                    "src=\"" . "il_" . IL_INST_ID . "_mob_" . $media_object->getId() . "\"", $questiontext);
+                $questiontext = str_replace(
+                    "src=\"" . $mob["mob"] . "\"",
+                    "src=\"" . "il_" . IL_INST_ID . "_mob_" . $media_object->getId() . "\"",
+                    $questiontext
+                );
 
                 // images in question parts
                 foreach ($this->object->getParts() as $part_obj) {
-                    $part_obj->setText(str_replace("src=\"" . $mob["mob"] . "\"",
-                        "src=\"" . "il_" . IL_INST_ID . "_mob_" . $media_object->getId() . "\"", $part_obj->getText()));
+                    $part_obj->setText(str_replace(
+                        "src=\"" . $mob["mob"] . "\"",
+                        "src=\"" . "il_" . IL_INST_ID . "_mob_" . $media_object->getId() . "\"",
+                        $part_obj->getText()
+                    ));
                 }
 
                 // images in feedback
                 foreach ($feedbacksgeneric as $correctness => $material) {
-                    $feedbacksgeneric[$correctness] = str_replace("src=\"" . $mob["mob"] . "\"",
-                        "src=\"" . "il_" . IL_INST_ID . "_mob_" . $media_object->getId() . "\"", $material);
+                    $feedbacksgeneric[$correctness] = str_replace(
+                        "src=\"" . $mob["mob"] . "\"",
+                        "src=\"" . "il_" . IL_INST_ID . "_mob_" . $media_object->getId() . "\"",
+                        $material
+                    );
                 }
             }
         }
@@ -170,13 +186,18 @@ class assAccountingQuestionImport extends assQuestionImport
         }
         foreach ($feedbacksgeneric as $correctness => $material) {
             $this->object->feedbackOBJ->importGenericFeedback(
-                $this->object->getId(), $correctness, ilRTE::_replaceMediaObjectImageSrc($material, 1)
+                $this->object->getId(),
+                $correctness,
+                ilRTE::_replaceMediaObjectImageSrc($material, 1)
             );
         }
         if (count($item->suggested_solutions)) {
             foreach ($item->suggested_solutions as $suggested_solution) {
-                $this->object->setSuggestedSolution($suggested_solution["solution"]->getContent(),
-                    $suggested_solution["gap_index"], true);
+                $this->object->setSuggestedSolution(
+                    $suggested_solution["solution"]->getContent(),
+                    $suggested_solution["gap_index"],
+                    true
+                );
             }
         }
 
@@ -197,5 +218,3 @@ class assAccountingQuestionImport extends assQuestionImport
         return $import_mapping;
     }
 }
-
-?>

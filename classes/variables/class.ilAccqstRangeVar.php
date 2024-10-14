@@ -1,4 +1,5 @@
 <?php
+
 // Copyright (c) 2019 Institut fuer Lern-Innovation, Friedrich-Alexander-Universitaet Erlangen-Nuernberg, GPLv3, see LICENSE
 
 
@@ -25,15 +26,13 @@ class ilAccqstRangeVar extends ilAccqstVariable
      */
     public function initFromXmlElement(SimpleXMLElement $element)
     {
-        if (empty($element['min']) || empty($element['max']))
-        {
+        if (empty($element['min']) || empty($element['max'])) {
             throw new ilException(sprintf($this->plugin->txt('missing_min_max'), $this->name));
         }
 
         $this->min = $this->plugin->toFloat($element['min']);
         $this->max = $this->plugin->toFloat($element['max']);
-        if (!empty($element['step']))
-        {
+        if (!empty($element['step'])) {
             $this->step = $this->plugin->toFloat($element['step']);
         }
     }
@@ -60,11 +59,11 @@ class ilAccqstRangeVar extends ilAccqstVariable
             return true;
         }
 
-       $maxsteps = (int) (($this->max - $this->min) / $this->step);
-       $num = rand(0, $maxsteps);
+        $maxsteps = (int) (($this->max - $this->min) / $this->step);
+        $num = rand(0, $maxsteps);
 
-       $this->value = (float) ( $this->min + $num * $this->step);
+        $this->value = (float) ($this->min + $num * $this->step);
 
-       return true;
+        return true;
     }
 }

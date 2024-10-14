@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Copyright (c) 2014 Institut fuer Lern-Innovation, Friedrich-Alexander-Universitaet Erlangen-Nuernberg 
- * GPLv2, see LICENSE 
+ * Copyright (c) 2014 Institut fuer Lern-Innovation, Friedrich-Alexander-Universitaet Erlangen-Nuernberg
+ * GPLv2, see LICENSE
  */
 
 /**
@@ -16,7 +16,6 @@
 
 class ilAssAccountingQuestionFeedback extends ilAssSingleOptionQuestionFeedback
 {
-
     /**
      * object instance of current question
      * @var assAccountingQuestion
@@ -33,7 +32,7 @@ class ilAssAccountingQuestionFeedback extends ilAssSingleOptionQuestionFeedback
      * @param boolean $solutionCompleted
      * @return string $genericFeedbackTestPresentationHTML
      */
-    public function getGenericFeedbackTestPresentation($questionId, $solutionCompleted) : string
+    public function getGenericFeedbackTestPresentation($questionId, $solutionCompleted): string
     {
         $html = parent::getGenericFeedbackTestPresentation($questionId, $solutionCompleted);
         return $this->questionOBJ->substituteVariables($html, assAccountingQuestion::SUB_DISPLAY);

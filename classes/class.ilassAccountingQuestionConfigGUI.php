@@ -50,13 +50,12 @@ class ilassAccountingQuestionConfigGUI extends ilPluginConfigGUI
     /**
      * Handles all commands, default is "configure"
      */
-    public function performCommand($cmd) : void
+    public function performCommand($cmd): void
     {
         $this->plugin = $this->getPluginObject();
         $this->config = $this->plugin->getConfig();
 
-        switch ($cmd)
-        {
+        switch ($cmd) {
             case "saveConfiguration":
                 $this->saveConfiguration();
                 break;
@@ -83,8 +82,7 @@ class ilassAccountingQuestionConfigGUI extends ilPluginConfigGUI
     protected function saveConfiguration()
     {
         $form = $this->initConfigForm();
-        if (!$form->checkInput())
-        {
+        if (!$form->checkInput()) {
             $form->setValuesByPost();
             $this->tpl->setContent($form->getHTML());
             return;
