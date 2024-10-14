@@ -500,7 +500,7 @@ class assAccountingQuestionGUI extends assQuestionGUI
                 break;
 
             case 'booking':
-                $part_obj = $this->object->getPart($_GET['part_id']);
+                $part_obj = $this->object->getPart($this->plugin->request()->getInt('part_id'));
                 $file = $part_obj->getBookingXML();
                 $filename = 'booking' . $part_obj->getPartId() . '.xml';
                 break;
@@ -1041,7 +1041,7 @@ class assAccountingQuestionGUI extends assQuestionGUI
         $show_points = false;
         if (is_object($this->getPreviewSession())) {
             $show_points = true;
-        } elseif ($ilAccess->checkAccess('write', '', ($_GET['ref_id'] ?? ''))) {
+        } elseif ($ilAccess->checkAccess('write', '', ($this->plugin->request()->getInt('ref_id')))) {
             $show_points = true;
             $feedback_note = $this->plugin->txt('grading_details_note');
         }
